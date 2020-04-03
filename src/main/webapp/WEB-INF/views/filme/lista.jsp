@@ -12,8 +12,9 @@
 			<thead>
 				<tr>
 					<th>Nome</th>
+					<th>Gênero</th>
 					<th>Duração</th>
-					<!-- <th>Preço</th> -->
+					<th>Preço </th>
 					<th colspan="2" class="text-center">Ações</th>
 				</tr>
 			</thead>
@@ -21,8 +22,12 @@
 				<c:forEach var="filme" items="${filmes}">
 					<tr>
 						<td>${filme.nome}</td>
-						<td>${filme.duracao.toMinutes()}</td>
-				<%--		<td>${filme.preco}</td>			--%>			
+												<td>${filme.genero.nome}</td>
+			<td>${filme.duracao} minutos</td>
+			
+			
+						<td>R$ ${filme.preco}</td>
+						
 						<td>
 							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
 						</td>
