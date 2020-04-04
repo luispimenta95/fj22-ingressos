@@ -14,8 +14,8 @@
 					<th>Nome</th>
 					<th>Gênero</th>
 					<th>Duração</th>
-					<th>Preço </th>
-					<th colspan="2" class="text-center">Ações</th>
+					<th>Preço do ingresso </th>
+						<th colspan="2" class="text-center">Ações</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -23,10 +23,9 @@
 					<tr>
 						<td>${filme.nome}</td>
 												<td>${filme.genero.nome}</td>
-			<td>${filme.duracao} minutos</td>
-			
-			
-						<td>R$ ${filme.preco}</td>
+												<td>${filme.duracao} minutos</td>
+					
+					<td>R$ ${filme.preco}</td>
 						
 						<td>
 							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
