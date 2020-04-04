@@ -22,7 +22,11 @@
 
             <div class="form-group">
                 <label for="genero">Genero:</label>
-                <input id="genero" type="text" name="genero" class="form-control" value="${filme.genero}">
+             <select class="form-control">
+             <option>Selecione</option>
+             
+             
+             </select>
                 <c:forEach items="${bindingResult.getFieldErrors('genero')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
@@ -30,8 +34,7 @@
 
             <div class="form-group">
                 <label for="duracao">Duracao:</label>
-                <input id="duracao" type="text" name="duracao" class="form-control"
-                       value="${filme.duracao.toMinutes()}">
+                <input id="duracao" type="text" name="duracao" class="form-control">
                 <c:forEach items="${bindingResult.getFieldErrors('duracao')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
