@@ -22,10 +22,13 @@
 
             <div class="form-group">
                 <label for="genero">Genero:</label>
-             <select class="form-control">
+             <select name="generoId" class="form-control">
              <option>Selecione</option>
              
-             
+			<c:forEach items="${generos}" var="genero">
+			<option value="${genero.id_genero }"  ${genero.id_genero.equals(filme.generoId)? "selected": ""}>${genero.nome } </option>
+			
+			</c:forEach>             
              </select>
                 <c:forEach items="${bindingResult.getFieldErrors('genero')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>

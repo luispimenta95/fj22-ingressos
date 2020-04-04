@@ -40,14 +40,18 @@ public class Filme implements Serializable{
 	@JoinColumn(name = "Id_genero")
 	private Genero genero;
 	private String nome;
-	private int duracao;
-	private BigDecimal preco;
-	public int getDuracao() {
+	private Duration duracao;
+	public Duration getDuracao() {
 		return duracao;
 	}
-	public void setDuracao(int duracao) {
+	public void setDuracao(Duration duracao) {
 		this.duracao = duracao;
 	}
+
+	private BigDecimal preco;
+	
+	
+	
 	public BigDecimal getPreco() {
 		return preco;
 	}
