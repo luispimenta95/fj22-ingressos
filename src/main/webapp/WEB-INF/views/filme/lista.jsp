@@ -21,7 +21,7 @@
 				<c:forEach var="filme" items="${filmes}">
 					<tr>
 						<td>${filme.nome}</td>
-						<td>${filme.duracao.toMinutes()}</td>
+						<td>${filme.duracao}</td>
 				<%--		<td>${filme.preco}</td>			--%>			
 						<td>
 							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
