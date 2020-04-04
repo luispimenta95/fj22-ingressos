@@ -12,26 +12,14 @@
 			<thead>
 				<tr>
 					<th>Nome</th>
-					<th>Gênero</th>
-					<th>Duração</th>
-					<th>Preço do ingresso </th>
-						<th colspan="2" class="text-center">Ações</th>
+					
+					<th colspan="2" class="text-center">Ações</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="filme" items="${filmes}">
+				<c:forEach var="genero" items="${generos}">
 					<tr>
-						<td>${filme.nome}</td>
-<<<<<<< HEAD
-						<td>${filme.duracao}</td>
-				<%--		<td>${filme.preco}</td>			--%>			
-=======
-												<td>${filme.genero.nome}</td>
-												<td>${filme.duracao} minutos</td>
-					
-					<td>R$ ${filme.preco}</td>
-						
->>>>>>> 254cd76628dc5893608f0683d46fed83295c8fff
+						<td>${genero.nome}</td>
 						<td>
 							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
 						</td>
@@ -40,7 +28,7 @@
 			</tbody>
 		</table>
 		<div class="col-md-6 col-md-offset-3">
-			<a href="/admin/filme" class="btn btn-block btn-info">Novo</a>
+			<a href="/admin/genero" class="btn btn-block btn-info">Novo</a>
 		</div>
 		</div>
 		<script>

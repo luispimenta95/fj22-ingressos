@@ -23,7 +23,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Ingresso</a>
+				<a class="navbar-brand" href="/">Cine Luis</a>
 			</div>
 
 
@@ -33,6 +33,7 @@
 
 
 					<li><a href="/admin/filmes">Filmes</a></li>
+					<li><a href="/admin/generos">Gêneros</a></li>
 					<li><a href="/admin/salas">Salas</a></li>
 			<!--		<li><a href="/filme/em-cartaz">Comprar</a></li>		-->																					
 

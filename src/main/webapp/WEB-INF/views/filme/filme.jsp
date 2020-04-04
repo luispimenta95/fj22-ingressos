@@ -22,7 +22,14 @@
 
             <div class="form-group">
                 <label for="genero">Genero:</label>
-                <input id="genero" type="text" name="genero" class="form-control" value="${filme.genero}">
+             <select name="generoId" class="form-control">
+             <option>Selecione</option>
+             
+			<c:forEach items="${generos}" var="genero">
+			<option value="${genero.id_genero }"  ${genero.id_genero.equals(filme.generoId)? "selected": ""}>${genero.nome } </option>
+			
+			</c:forEach>             
+             </select>
                 <c:forEach items="${bindingResult.getFieldErrors('genero')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
@@ -37,13 +44,13 @@
             </div>
 		
 		
-<!-- 			<div class="form-group"> -->
-<!-- 				<label for="preco">Preço:</label> -->
-<%-- 				<input id="preco" type="text" name="preco" class="form-control" value="${filme.preco}"> --%>
-<%-- 				<c:forEach items="${bindingResult.getFieldErrors('preco')}" var="error">  --%>
-<%-- 					<span class="text-danger">${error.defaultMessage}</span> --%>
-<%-- 				</c:forEach> --%>
-<!-- 			</div> -->
+	<div class="form-group">
+			<label for="preco">Preço:</label>
+ 				<input id="preco" type="text" name="preco" class="form-control" value="${filme.preco}">
+ 				<c:forEach items="${bindingResult.getFieldErrors('preco')}" var="error"> 
+ 					<span class="text-danger">${error.defaultMessage}</span> 
+				</c:forEach> 
+</div>
 
             <button type="submit" class="btn btn-primary">Gravar</button>
         </form>

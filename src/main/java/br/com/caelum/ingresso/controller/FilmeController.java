@@ -1,7 +1,11 @@
 package br.com.caelum.ingresso.controller;
 
 import br.com.caelum.ingresso.dao.FilmeDao;
+import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.model.Genero;
+import br.com.caelum.ingresso.model.form.FilmeForm;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -22,17 +28,22 @@ public class FilmeController {
     @Autowired
     private FilmeDao filmeDao;
 
-
+@Autowired
+private GeneroDao gd;
     @GetMapping({"/admin/filme", "/admin/filme/{id}"})
-    public ModelAndView form(@PathVariable("id") Optional<Integer> id, Filme filme){
+    public ModelAndView form(@PathVariable("id") Optional<Integer> id, FilmeForm filmeForm){
 
         ModelAndView modelAndView = new ModelAndView("filme/filme");
 
         if (id.isPresent()){
-            filme = filmeDao.findOne(id.get());
+        	
+        	Filme  filme = filmeDao.findOne(id.get());
+        	filmeForm.fromFilme(filme);
         }
 
-        modelAndView.addObject("filme", filme);
+        List<Genero> generos = gd.findAll();
+        modelAndView.addObject("generos",generos);
+        modelAndView.addObject("filme",filmeForm);
 
         return modelAndView;
     }
@@ -40,12 +51,13 @@ public class FilmeController {
 
     @PostMapping("/admin/filme")
     @Transactional
-    public ModelAndView salva(@Valid Filme filme, BindingResult result){
+    public ModelAndView salva(@Valid FilmeForm filmeForm, BindingResult result){
 
         if (result.hasErrors()) {
-            return form(Optional.ofNullable(filme.getId()), filme);
+            return form(Optional.ofNullable(filmeForm.getId()), filmeForm);
         }
 
+        Filme filme=filmeForm.toFilme(gd);
         filmeDao.save(filme);
 
         ModelAndView view = new ModelAndView("redirect:/admin/filmes");
