@@ -16,6 +16,10 @@ public class SessaoDao {
 	@PersistenceContext
 	private EntityManager em;
 
+	
+	
+	
+	
 	public void salva(Sessao s) {
 		em.persist(s);
 	}
@@ -24,5 +28,14 @@ public class SessaoDao {
 
 		return em.createQuery("select	s from	Sessao	s	where	s.sala	=	:sala", Sessao.class)
 				.setParameter("sala", sala).getResultList();
+	}
+	
+	
+	public Sessao findOne(Integer id) {
+		return em.find(Sessao.class, id);
+	}
+	
+	public void delete (Integer id) {
+		em.remove(findOne(id));
 	}
 }
