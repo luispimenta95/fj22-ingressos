@@ -20,6 +20,7 @@ import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.model.GerenciadorDeSessao;
 import br.com.caelum.ingresso.model.Lugar;
 import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.Sessao;
@@ -39,12 +40,12 @@ public class SessaoController {
 	private SessaoDao sessD;
 
 	@GetMapping("/admin/sessao")
-	public ModelAndView formSessao(@RequestParam("salaId") Integer salaId,SessaoForm form) {
+	public ModelAndView formSessao(@RequestParam("salaId") Integer salaId, SessaoForm form) {
 		List<Filme> filmes = fd.findAll();
 		ModelAndView mav = new ModelAndView("sessao/sessao");
 		mav.addObject("filmes", fd.findAll());
 		mav.addObject("sala", sd.findOne(salaId));
-		mav.addObject("form",form);
+		mav.addObject("form", form);
 		return mav;
 	}
 
@@ -56,16 +57,22 @@ public class SessaoController {
 
 		}
 		Sessao sessao = form.toSessao(sd, fd);
-		sessD.salva(sessao);
-		ModelAndView view = new ModelAndView("redirect:/admin/sala/" + form.getSalaId() + "/sessoes/");
-		return view;
+		List<Sessao> sessoes = sessD.buscaSessoes(sessao.getSala());
+		GerenciadorDeSessao g = new GerenciadorDeSessao(sessoes);
+		if (g.cabe(sessao)) {
+			sessD.salva(sessao);
+			ModelAndView view = new ModelAndView("redirect:/admin/sala/" + form.getSalaId() + "/sessoes/");
+			return view;
 
+		}
+
+		return formSessao(form.getSalaId(), form);
 	}
-	
-	  @DeleteMapping("/admin/sessao/{id}")
-	    @ResponseBody
-	    @Transactional
-	    public void delete(@PathVariable("id") Integer id){
-	        sessD.delete(id);
-	    }
+
+	@DeleteMapping("/admin/sessao/{id}")
+	@ResponseBody
+	@Transactional
+	public void delete(@PathVariable("id") Integer id) {
+		sessD.delete(id);
+	}
 }
