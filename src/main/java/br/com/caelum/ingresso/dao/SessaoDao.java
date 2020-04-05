@@ -26,7 +26,7 @@ public class SessaoDao {
 
 	public List<Sessao> buscaSessoes(Sala sala) {
 
-		return em.createQuery("select	s from	Sessao	s	where	s.sala	=	:sala", Sessao.class)
+		return em.createQuery("select	s from	Sessao	s	where	s.sala	=	:sala order by s.horario", Sessao.class)
 				.setParameter("sala", sala).getResultList();
 	}
 	

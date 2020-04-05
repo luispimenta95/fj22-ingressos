@@ -21,7 +21,7 @@
 					<tr>
 						<td>${genero.nome}</td>
 						<td>
-							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
+							<a onclick="excluir(${genero.id_genero})" class="btn btn-danger">Excluir</a>
 						</td>
 					</tr>
 				</c:forEach>
