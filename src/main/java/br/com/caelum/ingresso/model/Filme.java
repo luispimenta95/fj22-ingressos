@@ -27,15 +27,16 @@ public class Filme implements Serializable{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-	private int id;
-	public int getId() {
+	Integer id;
+	
+	
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	@ManyToOne
 	@JoinColumn(name = "Id_genero")
 	private Genero genero;
