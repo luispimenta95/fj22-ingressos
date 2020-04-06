@@ -7,10 +7,7 @@
 
 <ingresso:template>
 	<jsp:body>
-	 <form method="get" action="/admin/search">
-        <input type="text" name="keyword" /> &nbsp;
-        <input type="submit" value="Search" />
-    </form>
+
 		
 		<div class=" col-md-6 col-md-offset-3">
 		<table class="table table-hover ">
@@ -24,7 +21,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="filme" items="${filmes}">
+				<c:forEach var="filme" items="${result}">
 					<tr>
 						<td>${filme.nome}</td>
 						<td>${filme.genero.nome}</td>

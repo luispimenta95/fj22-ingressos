@@ -5,6 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import java.util.List;
 
 /**
@@ -32,4 +34,13 @@ public class FilmeDao {
     public void delete(Integer id) {
         manager.remove(findOne(id));
     }
+   
+    public List<Filme> BuscaNomes(String nome) {
+    Query query = manager.createQuery("FROM Filme WHERE nome like concat('%',:studentName,'%')");
+    query.setParameter("studentName", nome);
+    List<Filme> list = query.getResultList();
+    if(list.size()==0)
+        return null;
+    return list;
 }
+}  
