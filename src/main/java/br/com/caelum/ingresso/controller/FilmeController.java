@@ -78,8 +78,9 @@ private GeneroDao gd;
     @RequestMapping("admin/search")
     public ModelAndView search(@RequestParam String keyword) {
         List<Filme> result = filmeDao.BuscaNomes(keyword);
+        	
         
-        
+   
         
         
         ModelAndView mav = new ModelAndView("filme/search");
