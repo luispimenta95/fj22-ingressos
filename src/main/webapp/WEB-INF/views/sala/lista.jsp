@@ -11,6 +11,8 @@
         <input type="submit" value="Search" />
         
         </form>
+        <h2 class="text-center">Salas</h2>
+		
 		<div class=" col-md-6 col-md-offset-3">
         <table class="table table-hover ">
             <thead>

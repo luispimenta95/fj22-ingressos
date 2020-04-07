@@ -7,6 +7,7 @@
 
 <ingresso:template>
 	<jsp:body>
+        <h2 class="text-center">Filmes do gênero: ${genero.nome}</h2>
 
 		
 		<div class=" col-md-6 col-md-offset-3">
