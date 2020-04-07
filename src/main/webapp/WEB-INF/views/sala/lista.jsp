@@ -35,10 +35,10 @@
                         </a>
                     </td>
                     <td>
-                        <a onclick="excluir(${sala.id})" class="btn btn-danger">Excluir</a>
+                        <a onclick="excluir(${sala.id})" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span>Excluir</a>
                     </td>
                     <td>
-                        <a href="/admin/sala/${sala.id}" class="btn btn-info">Alterar</a>
+                        <a href="/admin/sala/${sala.id}" class="btn btn-info"> <span class="glyphicon glyphicon-pencil"></span> Alterar</a>
                     </td>
                 </tr>
             </c:forEach>

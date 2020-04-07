@@ -31,7 +31,7 @@
 					<td>R$ ${filme.preco}</td>
 						
 						<td>
-							<a onclick="excluir(${filme.id})" class="btn btn-danger">Excluir</a>
+							<a onclick="excluir(${filme.id})" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
 						</td>
 					</tr>
 				</c:forEach>
