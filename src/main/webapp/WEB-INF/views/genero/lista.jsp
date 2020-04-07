@@ -25,7 +25,9 @@
 					<tr>
 						<td>${genero.nome}</td>
 						<td>
-            <a href="/genero/lista2?Id_genero=${genero.id_genero}" class="btn  btn-success">Filmes</a>
+            <a href="/genero/lista2?Id_genero=${genero.id_genero}" class="btn  btn-success">           
+            <span class="glyphicon glyphicon-film"></span>
+            Filmes</a>
 						
 							<a onclick="excluir(${genero.id_genero})" class="btn btn-danger">Excluir</a>
 						</td>
