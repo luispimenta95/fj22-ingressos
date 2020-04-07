@@ -25,6 +25,8 @@
 					<tr>
 						<td>${genero.nome}</td>
 						<td>
+						<a class="btn btn-success">Filmes</a>
+						
 							<a onclick="excluir(${genero.id_genero})" class="btn btn-danger">Excluir</a>
 						</td>
 					</tr>
