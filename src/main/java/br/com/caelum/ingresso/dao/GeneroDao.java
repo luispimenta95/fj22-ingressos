@@ -1,10 +1,13 @@
 package br.com.caelum.ingresso.dao;
 
 import br.com.caelum.ingresso.model.Genero;
+import br.com.caelum.ingresso.model.Genero;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import java.util.List;
 
 /**
@@ -21,12 +24,24 @@ public class GeneroDao {
         return manager.find(Genero.class, id);
     }
 
-    public void save(Genero filme) {
-        manager.persist(filme);
+    public void save(Genero Genero) {
+        manager.persist(Genero);
     }
 
     public List<Genero> findAll() {
         return manager.createQuery("select g from Genero g order by g.nome", Genero.class).getResultList();
+    }
+    
+    public List<Genero> BuscaNomes(String nome) {
+        Query query = manager.createQuery("FROM Genero WHERE nome like concat('%',:nome_genero,'%')");
+        query.setParameter("nome_genero", nome);
+        List<Genero> list = query.getResultList();
+        if(list.size()==0) {
+            return manager.createQuery("select g from Genero g order by g.nome", Genero.class).getResultList();
+
+        }
+            
+        return list;
     }
 
     public void delete(Integer id) {

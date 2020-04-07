@@ -7,7 +7,7 @@
 
 <ingresso:template>
 	<jsp:body>
-	 <form method="get" action="/admin/search">
+	 <form method="get" action="/filme/search">
         <input type="text" name="keyword" /> &nbsp;
         <input type="submit" value="Search" />
     </form>

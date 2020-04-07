@@ -2,6 +2,7 @@ package br.com.caelum.ingresso.controller;
 
 import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
+import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Genero;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -62,6 +65,21 @@ public class GeneroController {
 
         return modelAndView;
     }
+    
+    @RequestMapping("genero/search")
+    public ModelAndView search(@RequestParam String keyword) {
+        List<Genero> result = generoDao.BuscaNomes(keyword);
+        	
+        
+   
+        
+        
+        ModelAndView mav = new ModelAndView("genero/search");
+        mav.addObject("result", result);
+     
+        return mav;    
+    }
+
 
 
     @DeleteMapping("/admin/genero/{id}")

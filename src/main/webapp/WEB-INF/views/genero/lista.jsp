@@ -7,6 +7,10 @@
 
 <ingresso:template>
 	<jsp:body>
+		 <form method="get" action="/genero/search">
+        <input type="text" name="keyword" /> &nbsp;
+        <input type="submit" value="Search" />
+    </form>
 		<div class=" col-md-6 col-md-offset-3">
 		<table class="table table-hover ">
 			<thead>
