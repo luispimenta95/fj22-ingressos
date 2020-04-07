@@ -5,6 +5,7 @@ import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Genero;
 import br.com.caelum.ingresso.model.form.FilmeForm;
+import br.com.caelum.ingresso.model.form.SessaoForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -89,6 +90,9 @@ private GeneroDao gd;
         return mav;    
     }
 
+    
+    
+    
     @DeleteMapping("/admin/filme/{id}")
     @ResponseBody
     @Transactional

@@ -53,6 +53,8 @@
 </div>
 
             <button type="submit" class="btn btn-primary">Gravar</button>
+            <a href="/admin/filmes" class="btn  btn-success">Voltar</a>
+            
         </form>
         </div>
     </jsp:body>

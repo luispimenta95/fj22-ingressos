@@ -25,7 +25,7 @@
 					<tr>
 						<td>${genero.nome}</td>
 						<td>
-						<a class="btn btn-success">Filmes</a>
+            <a href="/genero/lista2?Id_genero=${genero.id_genero}" class="btn  btn-success">Filmes</a>
 						
 							<a onclick="excluir(${genero.id_genero})" class="btn btn-danger">Excluir</a>
 						</td>

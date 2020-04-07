@@ -36,7 +36,7 @@
             </tbody>
         </table>
         <div class="col-md-6 col-md-offset-3">
-            <a href="/admin/sessao?salaId=${sala.id}" class="btn btn-block btn-info">Nova</a>
+            <a href="/admin/sessao?salaId=${sala.id}" class="btn btn-info">Nova</a>
         </div>
 		</div>
         <script>

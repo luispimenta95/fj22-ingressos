@@ -1,5 +1,6 @@
 package br.com.caelum.ingresso.controller;
 
+import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.model.Filme;
@@ -23,7 +24,9 @@ public class GeneroController {
 
     @Autowired
     private GeneroDao generoDao;
-
+    
+    @Autowired
+    private FilmeDao fd;
 
     @GetMapping({"/admin/genero", "/admin/genero/{id}"})
     public ModelAndView form(@PathVariable("id") Optional<Integer> id, Genero genero){
@@ -88,5 +91,14 @@ public class GeneroController {
     public void delete(@PathVariable("id") Integer id){
         generoDao.delete(id);
     }
-
+    @GetMapping("/genero/lista2")
+	public ModelAndView formSessao(@RequestParam("Id_genero") Integer genero) {
+		
+    	Genero g = generoDao.findOne(genero);
+    	List<Filme> filmes = fd.buscaFilmeGenero(g);
+		ModelAndView mav = new ModelAndView("genero/lista2");
+		mav.addObject("filmes", fd.buscaFilmeGenero(g));
+		return mav;
+	}
+    
 }

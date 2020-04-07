@@ -1,6 +1,10 @@
 package br.com.caelum.ingresso.dao;
 
 import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.model.Genero;
+import br.com.caelum.ingresso.model.Sala;
+import br.com.caelum.ingresso.model.Sessao;
+
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -46,4 +50,10 @@ public class FilmeDao {
         
     return list;
 }
+    
+    public List<Filme> buscaFilmeGenero(Genero g) {
+
+		return manager.createQuery("select	f from	Filme	f	where	f.genero	=	:genero order by f.nome", Filme.class)
+				.setParameter("genero", g).getResultList();
+	}
 }  
