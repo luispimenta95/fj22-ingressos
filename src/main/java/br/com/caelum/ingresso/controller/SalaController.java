@@ -3,6 +3,7 @@ package br.com.caelum.ingresso.controller;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.model.Sala;
+import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.form.SalaForm;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
+
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -95,4 +98,22 @@ public class SalaController {
     public void delete(@PathVariable("id") Integer id){
         salaDao.delete(id);
     }
+
+
+@RequestMapping("sala/search")
+public ModelAndView search(@RequestParam String keyword) {
+    List<Sala> result = salaDao.BuscaNomes(keyword);
+    	
+    
+
+    
+    
+    ModelAndView mav = new ModelAndView("sala/search");
+    mav.addObject("result", result);
+ 
+    return mav;    
 }
+
+
+}
+
