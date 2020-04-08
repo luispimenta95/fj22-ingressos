@@ -98,6 +98,9 @@ public class GeneroController {
     	List<Filme> filmes = fd.buscaFilmeGenero(g);
 		ModelAndView mav = new ModelAndView("genero/lista2");
 		mav.addObject("filmes", fd.buscaFilmeGenero(g));
+		mav.addObject("nome", g.getNome());
+
+		
 		return mav;
 	}
     
