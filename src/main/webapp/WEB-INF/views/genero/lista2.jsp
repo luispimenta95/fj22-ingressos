@@ -26,7 +26,7 @@
 					<tr>
 						<td>${filme.nome}</td>
 						<td>${filme.genero.nome}</td>
-					<td>${filme.duracao}</td>
+					<td>${filme.duracao.toMinutes()}</td>
 												
 					
 					<td>R$ ${filme.preco}</td>
