@@ -30,13 +30,14 @@
 					<tr>
 						<td>${filme.nome}</td>
 						<td>${filme.genero.nome}</td>
-					<td>${filme.duracao}</td>
-												
+					<td>${filme.duracao.toMinutes()} minutos</td>
+																	
 					
 					<td>R$ ${filme.preco}</td>
 						
 						<td>
-							<a onclick="excluir(${filme.id})" class="btn btn-danger"> <span class="glyphicon glyphicon-trash"></span> Excluir</a>
+							<a onclick="excluir(${filme.id})" class="btn btn-danger"> <span
+									class="glyphicon glyphicon-trash"></span> Excluir</a>
 						</td>
 					</tr>
 				</c:forEach>
