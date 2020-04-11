@@ -4,6 +4,7 @@ package br.com.caelum.ingresso.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.Duration;
 
 import javax.persistence.CascadeType;
@@ -17,9 +18,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-
+ 
 public class Filme implements Serializable{
 
+	public Filme() {
+		
+	}
 	/**
 	 * 
 	 */
@@ -49,12 +53,12 @@ public class Filme implements Serializable{
 		this.duracao = duracao;
 	}
 
-	private BigDecimal preco;
+	private BigDecimal preco = BigDecimal.ZERO;
 	
 	
 	
 	public BigDecimal getPreco() {
-		return preco;
+		return preco.setScale(2,RoundingMode.HALF_UP);
 	}
 	public void setPreco(BigDecimal preco) {
 		this.preco = preco;
@@ -71,8 +75,16 @@ public class Filme implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	public Filme(Genero genero, String nome, Duration duracao,  BigDecimal preco) {
+		
+		this.genero = genero;
+		this.nome = nome;
+		this.duracao = duracao;
+		this.preco =preco;
+		
+		
+	}
 		
 
-	
 
 }

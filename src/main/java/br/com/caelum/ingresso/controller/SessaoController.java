@@ -20,12 +20,9 @@ import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
 import br.com.caelum.ingresso.model.Filme;
-import br.com.caelum.ingresso.model.GerenciadorDeSessao;
-import br.com.caelum.ingresso.model.Lugar;
-import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.Sessao;
-import br.com.caelum.ingresso.model.form.LugarForm;
 import br.com.caelum.ingresso.model.form.SessaoForm;
+import br.com.caelum.ingresso.testes.GerenciadorDeSessao;
 
 @Controller
 
@@ -65,7 +62,7 @@ public class SessaoController {
 			return view;
 
 		}
-
+		resultado.rejectValue("horario", "Horário em conflito", "Sessão tem conflitos com outra"); 
 		return formSessao(form.getSalaId(), form);
 	}
 

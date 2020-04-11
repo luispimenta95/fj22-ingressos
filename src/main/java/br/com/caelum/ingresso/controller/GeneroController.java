@@ -73,11 +73,14 @@ public class GeneroController {
     public ModelAndView search(@RequestParam String keyword) {
         List<Genero> result = generoDao.BuscaNomes(keyword);
         	
-        
-   
-        
-        
         ModelAndView mav = new ModelAndView("genero/search");
+         
+   if(result.isEmpty()) {
+	   result = generoDao.findAll();
+	   mav.addObject("msg" ,"Teste");
+   }
+        
+        
         mav.addObject("result", result);
      
         return mav;    

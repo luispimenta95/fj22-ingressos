@@ -2,8 +2,12 @@ package br.com.caelum.ingresso.controller;
 
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
+import br.com.caelum.ingresso.dao.SessaoDao;
+import br.com.caelum.ingresso.model.DetalhesFilme;
 import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Genero;
+import br.com.caelum.ingresso.model.OmdbClient;
+import br.com.caelum.ingresso.model.Sessao;
 import br.com.caelum.ingresso.model.form.FilmeForm;
 import br.com.caelum.ingresso.model.form.SessaoForm;
 
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -25,79 +30,94 @@ import java.util.Optional;
 @Controller
 public class FilmeController {
 
+	@Autowired
+	private FilmeDao filmeDao;
 
-    @Autowired
-    private FilmeDao filmeDao;
+	@Autowired
+	private OmdbClient client;
 
-@Autowired
-private GeneroDao gd;
-    @GetMapping({"/admin/filme", "/admin/filme/{id}"})
-    public ModelAndView form(@PathVariable("id") Optional<Integer> id, FilmeForm filmeForm){
+	@Autowired
+	private GeneroDao gd;
 
-        ModelAndView modelAndView = new ModelAndView("filme/filme");
+	@Autowired
+	private SessaoDao sessaoDao;
 
-        if (id.isPresent()){
-        	
-        	Filme  filme = filmeDao.findOne(id.get());
-        	filmeForm.fromFilme(filme);
-        }
+	@GetMapping({ "/admin/filme", "/admin/filme/{id}" })
+	public ModelAndView form(@PathVariable("id") Optional<Integer> id, FilmeForm filmeForm) {
 
-        List<Genero> generos = gd.findAll();
-        modelAndView.addObject("generos",generos);
-        modelAndView.addObject("filme",filmeForm);
+		ModelAndView modelAndView = new ModelAndView("filme/filme");
 
-        return modelAndView;
-    }
+		if (id.isPresent()) {
 
+			Filme filme = filmeDao.findOne(id.get());
+			filmeForm.fromFilme(filme);
+		}
 
-    @PostMapping("/admin/filme")
-    @Transactional
-    public ModelAndView salva(@Valid FilmeForm filmeForm, BindingResult result){
+		List<Genero> generos = gd.findAll();
+		modelAndView.addObject("generos", generos);
+		modelAndView.addObject("filme", filmeForm);
 
-        if (result.hasErrors()) {
-            return form(Optional.ofNullable(filmeForm.getId()), filmeForm);
-        }
+		return modelAndView;
+	}
 
-        Filme filme=filmeForm.toFilme(gd);
-        filmeDao.save(filme);
+	@PostMapping("/admin/filme")
+	@Transactional
+	public ModelAndView salva(@Valid FilmeForm filmeForm, BindingResult result) {
 
-        ModelAndView view = new ModelAndView("redirect:/admin/filmes");
+		if (result.hasErrors()) {
+			return form(Optional.ofNullable(filmeForm.getId()), filmeForm);
+		}
 
-        return view;
-    }
+		Filme filme = filmeForm.toFilme(gd);
+		filmeDao.save(filme);
 
+		ModelAndView view = new ModelAndView("redirect:/admin/filmes");
 
-    @GetMapping(value="/admin/filmes")
-    public ModelAndView lista(){
+		return view;
+	}
 
-        ModelAndView modelAndView = new ModelAndView("filme/lista");
+	@GetMapping(value = "/admin/filmes")
+	public ModelAndView lista() {
 
-        modelAndView.addObject("filmes", filmeDao.findAll());
+		ModelAndView modelAndView = new ModelAndView("filme/lista");
 
-        return modelAndView;
-    }
-    @RequestMapping("filme/search")
-    public ModelAndView search(@RequestParam String keyword) {
-        List<Filme> result = filmeDao.BuscaNomes(keyword);
-        	
-        
-   
-        
-        
-        ModelAndView mav = new ModelAndView("filme/search");
-        mav.addObject("result", result);
-     
-        return mav;    
-    }
+		modelAndView.addObject("filmes", filmeDao.findAll());
 
-    
-    
-    
-    @DeleteMapping("/admin/filme/{id}")
-    @ResponseBody
-    @Transactional
-    public void delete(@PathVariable("id") Integer id){
-        filmeDao.delete(id);
-    }
+		return modelAndView;
+	}
 
+	@RequestMapping("filme/search")
+	public ModelAndView search(@RequestParam String keyword) {
+		List<Filme> result = filmeDao.BuscaNomes(keyword);
+
+		ModelAndView mav = new ModelAndView("filme/search");
+		mav.addObject("result", result);
+
+		return mav;
+	}
+
+	@GetMapping("/filme/em-cartaz")
+	public ModelAndView emCartaz() {
+		ModelAndView modelAndView = new ModelAndView("filme/em-cartaz");
+		modelAndView.addObject("filmes", filmeDao.findAll());
+		return modelAndView;
+	}
+
+	@DeleteMapping("/admin/filme/{id}")
+	@ResponseBody
+	@Transactional
+	public void delete(@PathVariable("id") Integer id) {
+		filmeDao.delete(id);
+	}
+
+	@GetMapping("/filme/{id}/detalhe")
+	public ModelAndView detalhes(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("/filme/detalhe");
+		Filme filme = filmeDao.findOne(id);
+		List<Sessao> sessoes = sessaoDao.buscaFilme(filme);
+		Optional<DetalhesFilme> detalhesDoFilme = client.request(filme);
+		modelAndView.addObject("sessoes", sessoes);
+		modelAndView.addObject("detalhes", detalhesDoFilme.orElse(new DetalhesFilme()));
+		return modelAndView;
+	}
 }

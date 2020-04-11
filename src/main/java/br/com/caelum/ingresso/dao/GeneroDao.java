@@ -36,10 +36,7 @@ public class GeneroDao {
         Query query = manager.createQuery("FROM Genero WHERE nome like concat('%',:nome_genero,'%')");
         query.setParameter("nome_genero", nome);
         List<Genero> list = query.getResultList();
-        if(list.size()==0) {
-            return manager.createQuery("select g from Genero g order by g.nome", Genero.class).getResultList();
-
-        }
+        
             
         return list;
     }

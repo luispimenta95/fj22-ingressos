@@ -1,9 +1,11 @@
-package br.com.caelum.ingresso.model;
+package br.com.caelum.ingresso.testes;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+
+import br.com.caelum.ingresso.model.Sessao;
 
 public class GerenciadorDeSessao {
 
@@ -30,16 +32,20 @@ public class GerenciadorDeSessao {
 	}
 
 	private boolean horarioIsConflitante(Sessao sessaoExistente, Sessao sessaoNova) {
-		LocalDateTime inicioSessaoExistente = getInicioSessaoComDiaDeHoje(sessaoExistente);
-		LocalDateTime terminoSessaoExistente = getTerminoSessaoComDiaDeHoje(sessaoExistente);
-		LocalDateTime inicioSessaoNova = getInicioSessaoComDiaDeHoje(sessaoNova);
-		LocalDateTime terminoSessaoNova = getTerminoSessaoComDiaDeHoje(sessaoNova);
-		boolean sessaoNovaTerminaAntesDaExistente = terminoSessaoNova.isBefore(inicioSessaoExistente);
-		boolean sessaoNovaComecaDepoisDaExistente = terminoSessaoExistente.isBefore(inicioSessaoNova);
-		if (sessaoNovaTerminaAntesDaExistente || sessaoNovaComecaDepoisDaExistente) {
-			return false;
-		}
-		return true;
+	LocalDateTime inicioSessaoExistente = getInicioSessaoComDiaDeHoje(sessaoExistente);
+	
+	LocalDateTime terminoSessaoExistente = getTerminoSessaoComDiaDeHoje(sessaoExistente);
+	
+	LocalDateTime inicioSessaoNova = getInicioSessaoComDiaDeHoje(sessaoNova);
+	
+	LocalDateTime terminoSessaoNova = getTerminoSessaoComDiaDeHoje(sessaoNova);
+	
+	boolean sessaoNovaTerminaAntesDaExistente = terminoSessaoNova.isBefore(inicioSessaoExistente);
+	boolean sessaoNovaComecaDepoisDaExistente = terminoSessaoExistente.isBefore(inicioSessaoNova);
+	if (sessaoNovaTerminaAntesDaExistente || sessaoNovaComecaDepoisDaExistente) {
+		return false;
+	}
+	return true;
 	}
 
 	private LocalDateTime getInicioSessaoComDiaDeHoje(Sessao sessao) {
@@ -51,4 +57,5 @@ public class GerenciadorDeSessao {
 		LocalDateTime inicioSessaoNova = getInicioSessaoComDiaDeHoje(sessao);
 		return inicioSessaoNova.plus(sessao.getFilme().getDuracao());
 	}
+
 }

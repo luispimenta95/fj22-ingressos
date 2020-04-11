@@ -12,6 +12,13 @@
         <input type="submit" value="Search" />
     </form>
     
+    <c:if test="${not empty msg}">
+		<div class="alert alert-info">
+				${msg}
+		</div>    
+    
+    </c:if>
+    
     <h2 class="text-center">Gêneros</h2>
 		<div class=" col-md-6 col-md-offset-3">
 		<table class="table table-hover ">

@@ -14,7 +14,7 @@
                             <div class="panel-heading text-center"><strong>${filme.nome}</strong></div>
                             <div class="panel-body">
                                 <div>
-                                    <strong>Genero:</strong> ${filme.genero}
+                                    <strong>Genero:</strong> ${filme.genero.nome}
                                 </div>
                                 <div>
                                     <strong>Duração:</strong> ${filme.duracao.toMinutes()} minutos
