@@ -2,6 +2,7 @@ package br.com.caelum.ingresso.controller;
 
 import br.com.caelum.ingresso.dao.SalaDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
+import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.form.SalaForm;
@@ -100,20 +101,24 @@ public class SalaController {
     }
 
 
-@RequestMapping("sala/search")
-public ModelAndView search(@RequestParam String keyword) {
-    List<Sala> result = salaDao.BuscaNomes(keyword);
-    	
-    
+    @RequestMapping("sala/search")
+	public ModelAndView search(@RequestParam String keyword) {
+		List<Sala> result = salaDao.BuscaNomes(keyword);
 
-    
-    
-    ModelAndView mav = new ModelAndView("sala/search");
-    mav.addObject("result", result);
- 
-    return mav;    
+		ModelAndView mav = new ModelAndView("sala/search");
+		if(result.isEmpty()) {
+			result = salaDao.findAll();
+			mav.addObject("msg" ,"Sua pesquisa não retornou nenhum resultado , por favor tente novamente");
+			
+		}
+		
+		mav.addObject("result", result);
+
+		return mav;
+	}
+
+
 }
 
 
-}
 

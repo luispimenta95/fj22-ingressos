@@ -91,6 +91,12 @@ public class FilmeController {
 		List<Filme> result = filmeDao.BuscaNomes(keyword);
 
 		ModelAndView mav = new ModelAndView("filme/search");
+		if(result.isEmpty()) {
+			result = filmeDao.findAll();
+			mav.addObject("msg" ,"Sua pesquisa não retornou nenhum resultado , por favor tente novamente");
+			
+		}
+		
 		mav.addObject("result", result);
 
 		return mav;

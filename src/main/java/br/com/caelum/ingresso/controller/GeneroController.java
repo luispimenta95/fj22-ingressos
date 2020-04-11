@@ -77,7 +77,7 @@ public class GeneroController {
          
    if(result.isEmpty()) {
 	   result = generoDao.findAll();
-	   mav.addObject("msg" ,"Teste");
+	   mav.addObject("msg" ,"Sua pesquisa não retornou nenhum resultado , por favor tente novamente");
    }
         
         

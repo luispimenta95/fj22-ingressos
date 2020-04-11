@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ taglib tagdir="/WEB-INF/tags/" prefix="ingresso" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib tagdir="/WEB-INF/tags/" prefix="ingresso"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <ingresso:template>
-    <jsp:body>
+	<jsp:body>
     
      <form method="get" action="/sala/search">
         <input type="text" name="keyword" /> &nbsp;
         <input type="submit" value="Search" />
         
         </form>
+    <c:if test="${not empty msg}">
+		<div class="alert alert-warning">
+				${msg}
+		</div>    
+    
+    </c:if>
         <h2 class="text-center">Salas</h2>
 		
 		<div class=" col-md-6 col-md-offset-3">
@@ -20,27 +26,36 @@
                 <th class="text-center">Nome</th>
 	       <!-- <th class="text-center">Preço</th>	  -->
                 <th colspan="4" class="text-center">Ações</th>
-            </thead>
+            
+				</thead>
             <tbody>
             <c:forEach var="sala" items="${result}">
                 <tr>
                     <td class="text-center">${sala.nome}</td>
 		 <%--   <td class="text-center">${sala.preco}</td> --%>
                     <td class="col-md-1">
-                        <a href="/admin/sala/${sala.id}/sessoes/" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span> Sessões
+                        <a href="/admin/sala/${sala.id}/sessoes/"
+								class="btn btn-primary">
+                            <span class="glyphicon glyphicon-blackboard"
+									aria-hidden="true"></span> Sessões
                         </a>
                     </td>
                     <td class="col-md-1">
-                        <a href="/admin/sala/${sala.id}/lugares/" class="btn btn-warning">
-                            <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Lugares
+                        <a href="/admin/sala/${sala.id}/lugares/"
+								class="btn btn-warning">
+                            <span class="glyphicon glyphicon-th"
+									aria-hidden="true"></span> Lugares
                         </a>
                     </td>
                     <td>
-                        <a onclick="excluir(${sala.id})" class="btn btn-danger">  <span class="glyphicon glyphicon-trash"></span> Excluir</a>
+                        <a onclick="excluir(${sala.id})"
+								class="btn btn-danger">  <span
+									class="glyphicon glyphicon-trash"></span> Excluir</a>
                     </td>
                     <td>
-                        <a href="/admin/sala/${sala.id}" class="btn btn-info">   <span class="glyphicon glyphicon-pencil"></span> Alterar</a>
+                        <a href="/admin/sala/${sala.id}"
+								class="btn btn-info">   <span
+									class="glyphicon glyphicon-pencil"></span> Alterar</a>
                     </td>
                 </tr>
             </c:forEach>

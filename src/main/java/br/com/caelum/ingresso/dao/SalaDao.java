@@ -36,10 +36,7 @@ public class SalaDao {
         Query query = manager.createQuery("FROM Sala WHERE nome like concat('%',:nome_sala,'%')");
         query.setParameter("nome_sala", nome);
         List<Sala> list = query.getResultList();
-        if(list.size()==0) {
-            return manager.createQuery("select s from Sala s order by s.nome", Sala.class).getResultList();
-
-        }
+       
             
         return list;
     }

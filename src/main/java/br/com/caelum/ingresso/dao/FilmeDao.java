@@ -43,11 +43,7 @@ public class FilmeDao {
     Query query = manager.createQuery("FROM Filme WHERE nome like concat('%',:nome_filme,'%')");
     query.setParameter("nome_filme", nome);
     List<Filme> list = query.getResultList();
-    if(list.size()==0) {
-        return manager.createQuery("select f from Filme f order by f.nome", Filme.class).getResultList();
-
-    }
-        
+   
     return list;
 }
     

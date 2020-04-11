@@ -12,6 +12,13 @@
         <input type="text" name="keyword" /> &nbsp;
         <input type="submit" value="Search" />
     </form>
+    
+    <c:if test="${not empty msg}">
+		<div class="alert alert-warning">
+				${msg}
+		</div>    
+    
+    </c:if>
 		<h2 class="text-center">Filmes</h2>
 		
 		<div class=" col-md-6 col-md-offset-3">
@@ -43,6 +50,7 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		
 		<div class="col-md-6 col-md-offset-3">
 			<a href="/admin/filme" class="btn btn-block btn-info">Novo</a>
 		</div>

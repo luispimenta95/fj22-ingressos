@@ -13,7 +13,7 @@
     </form>
     
     <c:if test="${not empty msg}">
-		<div class="alert alert-info">
+		<div class="alert alert-warning">
 				${msg}
 		</div>    
     
