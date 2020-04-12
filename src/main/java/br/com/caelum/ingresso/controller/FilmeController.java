@@ -1,28 +1,31 @@
 package br.com.caelum.ingresso.controller;
 
-import br.com.caelum.ingresso.dao.FilmeDao;
-import br.com.caelum.ingresso.dao.GeneroDao;
-import br.com.caelum.ingresso.dao.SessaoDao;
-import br.com.caelum.ingresso.model.DetalhesFilme;
-import br.com.caelum.ingresso.model.Filme;
-import br.com.caelum.ingresso.model.Genero;
-import br.com.caelum.ingresso.model.OmdbClient;
-import br.com.caelum.ingresso.model.Sessao;
-import br.com.caelum.ingresso.model.form.FilmeForm;
-import br.com.caelum.ingresso.model.form.SessaoForm;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
-
-import java.util.List;
-import java.util.Optional;
+import br.com.caelum.ingresso.dao.FilmeDao;
+import br.com.caelum.ingresso.dao.GeneroDao;
+import br.com.caelum.ingresso.dao.SessaoDao;
+import br.com.caelum.ingresso.model.DetalhesDoFilme;
+import br.com.caelum.ingresso.model.Filme;
+import br.com.caelum.ingresso.model.Genero;
+import br.com.caelum.ingresso.model.Sessao;
+import br.com.caelum.ingresso.model.form.FilmeForm;
 
 /**
  * Created by nando on 03/03/17.
@@ -34,13 +37,13 @@ public class FilmeController {
 	private FilmeDao filmeDao;
 
 	@Autowired
-	private OmdbClient client;
-
-	@Autowired
 	private GeneroDao gd;
 
 	@Autowired
 	private SessaoDao sessaoDao;
+
+	@Autowired
+	private OmdbClient client;
 
 	@GetMapping({ "/admin/filme", "/admin/filme/{id}" })
 	public ModelAndView form(@PathVariable("id") Optional<Integer> id, FilmeForm filmeForm) {
@@ -91,12 +94,12 @@ public class FilmeController {
 		List<Filme> result = filmeDao.BuscaNomes(keyword);
 
 		ModelAndView mav = new ModelAndView("filme/search");
-		if(result.isEmpty()) {
+		if (result.isEmpty()) {
 			result = filmeDao.findAll();
-			mav.addObject("msg" ,"Sua pesquisa não retornou nenhum resultado , por favor tente novamente");
-			
+			mav.addObject("msg", "Sua pesquisa não retornou nenhum resultado , por favor tente novamente");
+
 		}
-		
+
 		mav.addObject("result", result);
 
 		return mav;
@@ -109,6 +112,17 @@ public class FilmeController {
 		return modelAndView;
 	}
 
+	@GetMapping("/filme/{id}/detalhe")
+	public ModelAndView detalhes(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("/filme/detalhe");
+		Filme filme = filmeDao.findOne(id);
+		List<Sessao> sessoes = sessaoDao.buscaFilme(filme);
+		Optional<DetalhesDoFilme> detalhesDoFilme = client.request(filme);
+		modelAndView.addObject("sessoes", sessoes);
+		modelAndView.addObject("detalhes", detalhesDoFilme.orElse(new DetalhesDoFilme()));
+		return modelAndView;
+	}
+
 	@DeleteMapping("/admin/filme/{id}")
 	@ResponseBody
 	@Transactional
@@ -116,14 +130,4 @@ public class FilmeController {
 		filmeDao.delete(id);
 	}
 
-	@GetMapping("/filme/{id}/detalhe")
-	public ModelAndView detalhes(@PathVariable("id") Integer id) {
-		ModelAndView modelAndView = new ModelAndView("/filme/detalhe");
-		Filme filme = filmeDao.findOne(id);
-		List<Sessao> sessoes = sessaoDao.buscaFilme(filme);
-		Optional<DetalhesFilme> detalhesDoFilme = client.request(filme);
-		modelAndView.addObject("sessoes", sessoes);
-		modelAndView.addObject("detalhes", detalhesDoFilme.orElse(new DetalhesFilme()));
-		return modelAndView;
-	}
 }
