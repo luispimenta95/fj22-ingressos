@@ -18,4 +18,9 @@ public class LugarDao {
     public void save(Lugar lugar) {
         manager.persist(lugar);
     }
+
+	public Lugar findOne(Integer id) {
+		// TODO Auto-generated method stub
+		return manager.find(Lugar.class, id);
+	}
 }
