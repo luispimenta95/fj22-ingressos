@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,6 +94,7 @@ public class SessaoController {
 			Sessao sessao = sessD.findOne(sessaoId);
 			Optional<ImagemCapa> imagemCapa = client.request(sessao.getFilme(),ImagemCapa.class);
 			mav.addObject("sessao", sessao);
+			mav.addObject("carrinho",carrinho);
 			mav.addObject("imagemCapa", imagemCapa.orElse(new ImagemCapa()));
 			mav.addObject("tiposDeIngressos",TipoDeIngresso.values());
 			
@@ -103,8 +103,6 @@ public class SessaoController {
 	}
 	
 
-	
-	
 	
 	
 	@DeleteMapping("/admin/sessao/{id}")
