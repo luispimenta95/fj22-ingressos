@@ -10,11 +10,11 @@
         <c:set var="bindingResult" value="${requestScope['org.springframework.validation.BindingResult.genero']}"/>
 
         <form action='/admin/genero' method="post">
-            <input type="hidden" name="id" value="${genero.id_genero}">
+            <input type="hidden" name="id_genero" value="${generoForm.id_genero}">
 
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input id="nome" type="text" name="nome" class="form-control" value="${genero.nome}">
+                <input id="nome" type="text" name="nome" class="form-control" value="${generoForm.nome}">
                 <c:forEach items="${bindingResult.getFieldErrors('nome')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
