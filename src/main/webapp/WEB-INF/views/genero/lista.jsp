@@ -49,7 +49,7 @@
 			function excluir(id) {
 				var url = window.location.href;
 				$.ajax({
-					url:"/admin/filme/" + id,
+					url:"/admin/genero/" + id,
 					type: 'DELETE',
 					success: function (result) {
 						console.log(result);

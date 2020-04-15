@@ -91,10 +91,10 @@ public class GeneroController {
 		return mav;
 	}
 
-	@DeleteMapping("/admin/genero/{id}")
+	@DeleteMapping("/admin/genero/{Id_genero}")
 	@ResponseBody
 	@Transactional
-	public void delete(@PathVariable("id") Integer id) {
+	public void delete(@PathVariable("id_genero") Integer id) {
 		generoDao.delete(id);
 	}
 
