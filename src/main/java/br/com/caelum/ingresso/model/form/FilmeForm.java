@@ -13,6 +13,19 @@ import br.com.caelum.ingresso.model.Genero;
 public class FilmeForm {
 	private Integer id;
 
+	public FilmeForm(Filme filme) {
+		
+		this.id =filme.getId();
+		this.generoId=filme.getGenero().getId_genero();
+		this.preco = filme.getPreco();
+		this.nome = filme.getNome();
+		this.duracao = filme.getDuracao();
+		
+	}
+public FilmeForm() {
+	// TODO Auto-generated constructor stub
+}
+
 	public Integer getId() {
 		return id;
 	}

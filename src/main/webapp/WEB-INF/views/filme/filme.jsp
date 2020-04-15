@@ -10,11 +10,11 @@
         <c:set var="bindingResult" value="${requestScope['org.springframework.validation.BindingResult.filme']}"/>
 
         <form action='/admin/filme' method="post">
-            <input type="hidden" name="id" value="${filme.id}">
+            <input type="hidden" name="id" value="${filmeForm.id}">
 
             <div class="form-group">
                 <label for="nome">Nome:</label>
-                <input id="nome" type="text" name="nome" class="form-control" value="${filme.nome}">
+                <input id="nome" type="text" name="nome" class="form-control" value="${filmeForm.nome}">
                 <c:forEach items="${bindingResult.getFieldErrors('nome')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
@@ -26,7 +26,7 @@
              <option>Selecione</option>
              
 			<c:forEach items="${generos}" var="genero">
-			<option value="${genero.id_genero }"  ${genero.id_genero.equals(filme.generoId)? "selected": ""}>${genero.nome } </option>
+			<option value="${genero.id_genero }"  ${genero.id_genero.equals(filmeForm.generoId)? "selected": ""}>${genero.nome } </option>
 			
 			</c:forEach>             
              </select>
@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 <label for="duracao">Duracao:</label>
-                <input id="duracao" type="text" name="duracao" class="form-control">
+                <input id="duracao" type="text" name="duracao" class="form-control" value="${filmeForm.duracao.toMinutes()}">
                 <c:forEach items="${bindingResult.getFieldErrors('duracao')}" var="error">
                     <span class="text-danger">${error.defaultMessage}</span>
                 </c:forEach>
@@ -46,7 +46,7 @@
 		
 	<div class="form-group">
 			<label for="preco">Preço:</label>
- 				<input id="preco" type="text" name="preco" class="form-control" value="${filme.preco}">
+ 				<input id="preco" type="text" name="preco" class="form-control" value="${filmeForm.preco}">
  				<c:forEach items="${bindingResult.getFieldErrors('preco')}" var="error"> 
  					<span class="text-danger">${error.defaultMessage}</span> 
 				</c:forEach> 

@@ -53,12 +53,12 @@ public class FilmeController {
 		if (id.isPresent()) {
 
 			Filme filme = filmeDao.findOne(id.get());
-			filmeForm.fromFilme(filme);
+			filmeForm = new FilmeForm(filme);
 		}
 
 		List<Genero> generos = gd.findAll();
 		modelAndView.addObject("generos", generos);
-		modelAndView.addObject("filme", filmeForm);
+		modelAndView.addObject("filmeForm", filmeForm);
 
 		return modelAndView;
 	}

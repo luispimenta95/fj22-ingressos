@@ -28,7 +28,7 @@ public class FilmeDao {
     }
 
     public void save(Filme filme) {
-        manager.persist(filme);
+        manager.merge(filme);
     }
 
     public List<Filme> findAll() {
