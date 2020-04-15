@@ -11,14 +11,14 @@
 
 			<div class="form-group">
 	            <label for="fileira">Fileiras:</label>
-	            <input id="fileira" type="number" name="fileira" min="1" max="6" class="form-control" value="${lugarDto.fileira}">
-    			  <small id="emailHelp" class="form-text text-muted">Limite de 6 fileiras.</small>    	
+	            <input id="fileira" type="number" name="fileira" min="1" max="25" class="form-control" value="${lugarDto.fileira}">
+    			  <small id="emailHelp" class="form-text text-muted">Limite de 25 fileiras.</small>    	
         	
         	</div>
 			<div class="form-group">
 	            <label for="posicao">Lugares:</label>
-	            <input id="posicao" type="number" name="posicao" min="1" max="40" class="form-control" value="${lugarDto.posicao}">
-        	 <small id="emailHelp" class="form-text text-muted">Limite de 40 poltronas por fileiras.</small>    	
+	            <input id="posicao" type="number" name="posicao" min="1" max="20" class="form-control" value="${lugarDto.posicao}">
+        	 <small id="emailHelp" class="form-text text-muted">Limite de 20 poltronas por fileiras.</small>    	
         	
         	
         	</div>

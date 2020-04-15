@@ -15,7 +15,7 @@ public class CriadorDeLugar {
 	private SalaDao salaDao;
 
 	public void criaLugares(Integer fileira, Integer posicao, Integer salaId) {
-		String[] fl = { "A", "B", "C", "D", "E", "F" };
+		String[] fl = {"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","U","V","W","X","Y","Z"};
 		int f = 0, as = 0;
 		f = fileira;
 		as = posicao;

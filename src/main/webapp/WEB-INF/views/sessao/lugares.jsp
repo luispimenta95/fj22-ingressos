@@ -27,6 +27,9 @@
 			</div>
 		</div>
 		<div class="main">
+	
+						<div id="tela">Tela</div>
+					
 			<h2>Lugares</h2>
 			<table class="table-compra" id="lugares">
 				<tbody>
@@ -77,9 +80,7 @@ onclick="${sessao.isDisponivel(lugar) ? 'changeCheckbox(this)' : '' }" >
 							<td>
 						</tr>
 					</c:forEach>
-					<tr class="telao">
-						<td id="tela">Tela</td>
-					</tr>
+					
 					<tr class="legenda legenda-menu">
 						<td>Legenda</td>
 					</tr>
