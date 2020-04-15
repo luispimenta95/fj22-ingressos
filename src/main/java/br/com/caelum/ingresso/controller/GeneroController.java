@@ -94,7 +94,7 @@ public class GeneroController {
 	@DeleteMapping("/admin/genero/{Id_genero}")
 	@ResponseBody
 	@Transactional
-	public void delete(@PathVariable("id_genero") Integer id) {
+	public void delete(@PathVariable("Id_genero") Integer id) {
 		generoDao.delete(id);
 	}
 
