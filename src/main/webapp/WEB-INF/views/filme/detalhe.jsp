@@ -65,6 +65,8 @@
 										Comprar
 										<span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
 									</a>
+									
+									
 								</td>
 							</tr>
 						</c:forEach>

@@ -28,8 +28,8 @@ public class GeneroController {
     @Autowired
     private FilmeDao fd;
 
-    @GetMapping({"/admin/genero", "/admin/genero/{id}"})
-    public ModelAndView form(@PathVariable("id") Optional<Integer> id, Genero genero){
+    @GetMapping({"/admin/genero", "/admin/genero/{Id_genero}"})
+    public ModelAndView form(@PathVariable("Id_genero") Optional<Integer> id, Genero genero){
 
         ModelAndView modelAndView = new ModelAndView("genero/genero");
 

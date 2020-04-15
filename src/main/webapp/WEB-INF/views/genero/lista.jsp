@@ -30,6 +30,11 @@
             <span class="glyphicon glyphicon-film"></span>
             Filmes</a>
 						
+						
+						<a href="/admin/genero/${genero.id_genero}" class="btn  btn-info">           
+            <span class="glyphicon glyphicon-pencil"></span>
+            Alterar</a>
+						
 							<a onclick="excluir(${genero.id_genero})" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span> Excluir</a>
 						</td>
 					</tr>

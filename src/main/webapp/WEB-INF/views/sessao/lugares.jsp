@@ -119,6 +119,8 @@ onclick="${sessao.isDisponivel(lugar) ? 'changeCheckbox(this)' : '' }" >
 	            </table>
 	
 	            <button type="submit" class="btn btn-primary finaliza">Finalizar Compra</button>
+	            <a href="/filme/em-cartaz" class="btn  btn-success">Voltar</a>
+               
 	        </form>
 			</div>
 		</div>

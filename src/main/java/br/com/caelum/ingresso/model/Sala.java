@@ -21,6 +21,7 @@ public class Sala {
     private BigDecimal preco = BigDecimal.ZERO;
 
     @OneToMany(fetch = FetchType.EAGER)
+    @OrderBy("fileira asc, posicao asc") 
     private Set<Lugar> lugares = new HashSet<>();
 
     public BigDecimal getPreco() {
