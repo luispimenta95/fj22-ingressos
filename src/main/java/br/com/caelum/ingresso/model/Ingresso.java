@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,27 @@ public class Ingresso {
 	@ManyToOne
 	private Sessao sessao;
 	private BigDecimal preco;
+	@ManyToOne
+	private Lugar lugar;
+
+	@Enumerated(EnumType.STRING)
+	private TipoDeIngresso tipoDeIngresso;
+
+	public TipoDeIngresso getTipoDeIngresso() {
+		return tipoDeIngresso;
+	}
+
+	public void setTipoDeIngresso(TipoDeIngresso tipoDeIngresso) {
+		this.tipoDeIngresso = tipoDeIngresso;
+	}
+
+	public Lugar getLugar() {
+		return lugar;
+	}
+
+	public void setLugar(Lugar lugar) {
+		this.lugar = lugar;
+	}
 
 	public Sessao getSessao() {
 		return sessao;
@@ -40,8 +63,10 @@ public class Ingresso {
 		this.preco = preco;
 	}
 
-	public Ingresso(Sessao sessao, Desconto tipoDeDesconto) {
+	public Ingresso(Sessao sessao, TipoDeIngresso tipo, Lugar lugar) {
 		this.sessao = sessao;
-		this.preco = tipoDeDesconto.aplicarDesconto(sessao.getPreco());
+		this.preco = tipo.aplicarDesconto(sessao.getPreco());
+		this.lugar = lugar;
+		this.tipoDeIngresso =  tipo;
 	}
 }

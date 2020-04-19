@@ -27,6 +27,9 @@
 			</div>
 		</div>
 		<div class="main">
+	
+						<div id="tela">Tela</div>
+					
 			<h2>Lugares</h2>
 			<table class="table-compra" id="lugares">
 				<tbody>
@@ -38,8 +41,10 @@
 								<tr>
 								<c:forEach var="lugar" items="${map.value}">
 									<td class="fileira-assento"><figure>
-										<svg class="assento disponivel" data-lugar="${lugar}" id="${lugar.id}"  version="1.0" id="SEAT" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-												 viewBox="0 0 318.224 305.246" enable-background="new 0 0 318.224 305.246" xml:space="preserve">
+									
+
+										<svg class="assento ${sessao.isDisponivel(lugar) &&  !carrinho.isSelecionado(lugar) ? 'disponivel' : 'ocupado'}" data-lugar="${lugar}" id="${lugar.id}"  version="1.0" id="SEAT" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												onclick="${sessao.isDisponivel(lugar) &&  !carrinho.isSelecionado(lugar) ? 'changeCheckbox(this)' : '' }"  viewBox="0 0 318.224 305.246" enable-background="new 0 0 318.224 305.246" xml:space="preserve">
 											<g id="FILL">
 												<path d="M269.395,132.246h-15.02V51.414c0-11.758-9.492-21.248-21.248-21.248H85.097
 													c-11.757,0-21.248,9.49-21.248,21.248v80.833H48.827c-8.535,0-15.127,7.505-14.024,15.971l11.406,87.625
@@ -72,9 +77,7 @@
 							<td>
 						</tr>
 					</c:forEach>
-					<tr class="telao">
-						<td id="tela">Tela</td>
-					</tr>
+					
 					<tr class="legenda legenda-menu">
 						<td>Legenda</td>
 					</tr>
@@ -114,6 +117,8 @@
 	            </table>
 	
 	            <button type="submit" class="btn btn-primary finaliza">Finalizar Compra</button>
+	            <a href="/filme/em-cartaz" class="btn  btn-success">Voltar</a>
+               
 	        </form>
 			</div>
 		</div>

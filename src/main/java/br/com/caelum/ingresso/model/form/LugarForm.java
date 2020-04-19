@@ -9,17 +9,17 @@ import javax.validation.constraints.NotNull;
  * Created by nando on 03/03/17.
  */
 public class LugarForm {
-    @NotBlank
-    private String fileira;
+    @NotNull
+    private Integer fileira;
     @NotNull
     private Integer posicao;
     private Integer salaId;
 
-    public String getFileira() {
+    public Integer getFileira() {
         return fileira;
     }
 
-    public void setFileira(String fileira) {
+    public void setFileira(Integer fileira) {
         this.fileira = fileira;
     }
 
@@ -39,9 +39,7 @@ public class LugarForm {
         this.posicao = posicao;
     }
 
-    public Lugar toLugar() {
-        return new Lugar(fileira, posicao);
-    }
+    
 
 
 }

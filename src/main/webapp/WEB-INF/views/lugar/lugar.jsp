@@ -10,12 +10,17 @@
 			<input type="hidden" name="salaId" value="${lugarDto.salaId}">
 
 			<div class="form-group">
-	            <label for="fileira">Fileira:</label>
-	            <input id="fileira" type="text" name="fileira" class="form-control" value="${lugarDto.fileira}">
+	            <label for="fileira">Fileiras:</label>
+	            <input id="fileira" type="number" name="fileira" min="1" max="25" class="form-control" value="${lugarDto.fileira}">
+    			  <small id="emailHelp" class="form-text text-muted">Limite de 25 fileiras.</small>    	
+        	
         	</div>
 			<div class="form-group">
-	            <label for="posicao">Posicao:</label>
-	            <input id="posicao" type="text" name="posicao" class="form-control" value="${lugarDto.posicao}">
+	            <label for="posicao">Lugares:</label>
+	            <input id="posicao" type="number" name="posicao" min="1" max="20" class="form-control" value="${lugarDto.posicao}">
+        	 <small id="emailHelp" class="form-text text-muted">Limite de 20 poltronas por fileiras.</small>    	
+        	
+        	
         	</div>
 
 

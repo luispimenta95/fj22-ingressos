@@ -14,12 +14,13 @@ import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.Genero;
 import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.Sessao;
+import br.com.caelum.ingresso.validacao.GerenciadorDeSessao;
 
 public class GerenciadorSessaoTeste {
 
 
 
-	public class GerenciadorDeSessaoTest {
+	
 
 		private Filme filme;
 		private Sala sala;
@@ -78,4 +79,4 @@ public class GerenciadorSessaoTeste {
 		}
 	}
 
-}
+

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
@@ -53,12 +55,12 @@ public class FilmeController {
 		if (id.isPresent()) {
 
 			Filme filme = filmeDao.findOne(id.get());
-			filmeForm.fromFilme(filme);
+			filmeForm = new FilmeForm(filme);
 		}
 
 		List<Genero> generos = gd.findAll();
 		modelAndView.addObject("generos", generos);
-		modelAndView.addObject("filme", filmeForm);
+		modelAndView.addObject("filmeForm", filmeForm);
 
 		return modelAndView;
 	}
@@ -117,7 +119,7 @@ public class FilmeController {
 		ModelAndView modelAndView = new ModelAndView("/filme/detalhe");
 		Filme filme = filmeDao.findOne(id);
 		List<Sessao> sessoes = sessaoDao.buscaFilme(filme);
-		Optional<DetalhesDoFilme> detalhesDoFilme = client.request(filme);
+		Optional<DetalhesDoFilme> detalhesDoFilme = client.request(filme, DetalhesDoFilme.class);
 		modelAndView.addObject("sessoes", sessoes);
 		modelAndView.addObject("detalhes", detalhesDoFilme.orElse(new DetalhesDoFilme()));
 		return modelAndView;
@@ -127,7 +129,12 @@ public class FilmeController {
 	@ResponseBody
 	@Transactional
 	public void delete(@PathVariable("id") Integer id) {
+		try {
 		filmeDao.delete(id);
-	}
+	
+		}catch (Exception e) {
+			System.out.println("Mensagem de erro");
+		}
+		}
 
 }

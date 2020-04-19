@@ -25,7 +25,7 @@ public class GeneroDao {
     }
 
     public void save(Genero Genero) {
-        manager.persist(Genero);
+        manager.merge(Genero);
     }
 
     public List<Genero> findAll() {
