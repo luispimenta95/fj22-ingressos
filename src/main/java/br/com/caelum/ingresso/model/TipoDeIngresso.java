@@ -11,7 +11,7 @@ public enum TipoDeIngresso {
 	
 	private final Desconto desconto;
 	 
-	TipoDeIngresso(Desconto desconto) {
+	private TipoDeIngresso(Desconto desconto) {
 		this.desconto = desconto;
 	}
 	
@@ -20,7 +20,7 @@ public enum TipoDeIngresso {
 	}
 	
 	public String getDescricao() {
-		return desconto.getDescricao();
+		return this.desconto.getDescricao();
 	}
 	 
 }

@@ -37,6 +37,7 @@ public class FilmeDao {
 
     public void delete(Integer id) {
         manager.remove(findOne(id));
+        manager.flush();
     }
    
     public List<Filme> BuscaNomes(String nome) {

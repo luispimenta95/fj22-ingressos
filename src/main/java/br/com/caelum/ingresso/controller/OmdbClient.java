@@ -25,12 +25,12 @@ public class OmdbClient {
 		}
 	}
 
-	public <T> Optional<T> request(Filme filme, Class<T> tClass) {
+	public <T> Optional<T> request(Filme filme, Class<T> resposta) {
 		RestTemplate rest = new RestTemplate();
 		String titulo = filme.getNome().replace(" ", "+");
 		String url = String.format("https://omdb-fj22.herokuapp.com/movie?title=%s", titulo);
 		try {
-			return Optional.of(rest.getForObject(url, tClass));
+			return Optional.of(rest.getForObject(url, resposta));
 		} catch (Exception e) {
 			return Optional.empty();
 

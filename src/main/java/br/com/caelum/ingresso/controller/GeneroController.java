@@ -1,10 +1,12 @@
 package br.com.caelum.ingresso.controller;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -95,8 +97,13 @@ public class GeneroController {
 	@ResponseBody
 	@Transactional
 	public void delete(@PathVariable("Id_genero") Integer id) {
+		try {
 		generoDao.delete(id);
-	}
+		}
+		catch (ConstraintViolationException e) {
+			System.out.println(e.getMessage());
+		}
+		}
 
 	@GetMapping("/genero/lista2")
 	public ModelAndView formSessao(@RequestParam("Id_genero") Integer genero) {

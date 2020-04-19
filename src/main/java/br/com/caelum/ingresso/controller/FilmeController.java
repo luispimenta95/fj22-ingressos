@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
+
 import br.com.caelum.ingresso.dao.FilmeDao;
 import br.com.caelum.ingresso.dao.GeneroDao;
 import br.com.caelum.ingresso.dao.SessaoDao;
@@ -127,7 +129,12 @@ public class FilmeController {
 	@ResponseBody
 	@Transactional
 	public void delete(@PathVariable("id") Integer id) {
+		try {
 		filmeDao.delete(id);
-	}
+	
+		}catch (Exception e) {
+			System.out.println("Mensagem de erro");
+		}
+		}
 
 }

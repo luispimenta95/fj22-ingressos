@@ -26,7 +26,7 @@ import br.com.caelum.ingresso.model.ImagemCapa;
 import br.com.caelum.ingresso.model.Sessao;
 import br.com.caelum.ingresso.model.TipoDeIngresso;
 import br.com.caelum.ingresso.model.form.SessaoForm;
-import br.com.caelum.ingresso.testes.GerenciadorDeSessao;
+import br.com.caelum.ingresso.validacao.GerenciadorDeSessao;
 
 @Controller
 
